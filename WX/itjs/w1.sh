@@ -26,7 +26,7 @@ ds1() {
 
     echo -e "${BLUE} List all containers ${NC}"
     c1="docker ps -a"
-    echo -e "${BLUE} Executing ..${c1}"
+    echo -e "${BLUE} Executing ..${c1} ${NC}"
     eval "$c1"
 
     echo -e "${BLUE} Start smell_panty container ${NC}"
@@ -34,8 +34,8 @@ ds1() {
     echo -e "${BLUE} Executing ..${c2}"
     eval "$c2"
 
-    echo -e "${BLUE} Nose in her ass ${NC}"
-    c3="docker exec -it smell_panty"
+    echo -e "${MAGENTA} Nose in her ass ${NC}"
+    c3="docker exec -it smell_panty zsh"
     echo -e "${BLUE} Executing ..${c3}"
     eval "$c3"
 
@@ -74,6 +74,6 @@ nc_in() {
 
 
 # --- Execution --- 
-
+ds1
 # nc_1
 # nc_in
