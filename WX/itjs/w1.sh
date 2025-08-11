@@ -20,6 +20,27 @@ h1() {
     echo -e "${CYAN}~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~${NC}"
 }
 
+# --- Start container --- 
+ds1() {
+    h1 "Start container"
+
+    echo -e "${BLUE} List all containers ${NC}"
+    c1="docker ps -a"
+    echo -e "${BLUE} Executing ..${c1}"
+    eval "$c1"
+
+    echo -e "${BLUE} Start smell_panty container ${NC}"
+    c2="docker start smell_panty"
+    echo -e "${BLUE} Executing ..${c2}"
+    eval "$c2"
+
+    echo -e "${BLUE} Nose in her ass ${NC}"
+    c3="docker exec -it smell_panty"
+    echo -e "${BLUE} Executing ..${c3}"
+    eval "$c3"
+
+}
+
 # Using nc 
 nc_1() {
     h1 "Using NC"
@@ -48,12 +69,11 @@ nc_in() {
     c3="sudo alien nmap-5.21-1.x86_64.rpm"
     echo -e "${GREEN} Executing... ${c3} ${NC}"
     eval "$c3"
-
-
 }
 
 
 
 # --- Execution --- 
+
 # nc_1
-nc_in
+# nc_in
