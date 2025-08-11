@@ -54,26 +54,50 @@ nc_1() {
 # https://nmap.org/download.html#linux-rpm - Following this 
 nc_in() {
     h1 "Installing NCAT"
+    
+    # Vars
+    URL="https://nmap.org/dist/ncat-7.97-1.x86_64.rpm"
+    F1="ncat-7.97-1.x86_64.rpm"
+    F2="ncat_7.97-2_amd64.deb"
 
+    # Install Alien
+    echo -e "${YELLOW} ----------------------- ${NC}"
     echo -e "${BLUE} First install Alien ${NC}"
     c1="sudo apt-get install alien"
     echo -e "${GREEN} Executing... ${c1} ${NC}"
     eval "$c1"
 
-    echo -e "${BLUE} Download rpm - ncat-7.97-1.x86_64.rpm ${NC}"
-    c2="wget https://nmap.org/dist/ncat-7.97-1.x86_64.rpm"
+    # Downlaod ncat 
+    echo -e "${YELLOW} ----------------------- ${NC}"
+    echo -e "${BLUE} Download ncat-7.97-1.x86_64.rpm ${NC}"
+    c2="wget ${URL}"
     echo -e "${GREEN} Executing... ${c2} ${NC}"
     eval "$c2"
 
-    echo -e "${BLUE} Download rpm - ncat-7.97-1.x86_64.rpm ${NC}"
-    c3="sudo alien nmap-5.21-1.x86_64.rpm"
+    # Convert to DEB 
+    echo -e "${YELLOW} ----------------------- ${NC}"
+    echo -e "${BLUE} Generate DEB ${NC}"
+    c3="sudo alien ${F1}"
     echo -e "${GREEN} Executing... ${c3} ${NC}"
     eval "$c3"
 
-    echo -e "${BLUE} sudo dpkg --install nmap_5.21-2_amd64.deb ${NC}"
-    c4="sudo dpkg --install nmap_5.21-2_amd64.deb"
+    # Install DEB
+    echo -e "${YELLOW} ----------------------- ${NC}"
+    echo -e "${BLUE} Install deb ${NC}"
+    c4="sudo dpkg --install ${F2}"
     echo -e "${GREEN} Executing... ${c4} ${NC}"
-    eval "$c3"
+    eval "$c4"
+
+    # Run version 
+    ncat --version
+
+    # Cleanup 
+    echo -e "${YELLOW} ----------------------- ${NC}"
+    c5="rm ${F1} ${F2}"
+    echo -e "${BLUE} Cleanup ${NC}"
+    echo -e "${GREEN} Executing... ${c1} ${NC}"
+    eval "$c5"
+
 }
 
 
