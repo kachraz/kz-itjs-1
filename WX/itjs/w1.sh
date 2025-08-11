@@ -26,17 +26,17 @@ ds1() {
 
     echo -e "${BLUE} List all containers ${NC}"
     c1="docker ps -a"
-    echo -e "${BLUE} Executing ..${c1} ${NC}"
+    echo -e "${GREEN} Executing ..${c1} ${NC}"
     eval "$c1"
 
     echo -e "${BLUE} Start smell_panty container ${NC}"
     c2="docker start smell_panty"
-    echo -e "${BLUE} Executing ..${c2}"
+    echo -e "${GREEN} Executing ..${c2}${NC}"
     eval "$c2"
 
     echo -e "${MAGENTA} Nose in her ass ${NC}"
     c3="docker exec -it smell_panty zsh"
-    echo -e "${BLUE} Executing ..${c3}"
+    echo -e "${GREEN} Executing ..${c3}${NC}"
     eval "$c3"
 
 }
@@ -65,6 +65,11 @@ nc_in() {
     echo -e "${GREEN} Executing... ${c2} ${NC}"
     eval "$c2"
 
+    echo -e "${BLUE} Download rpm - ncat-7.97-1.x86_64.rpm ${NC}"
+    c3="sudo alien nmap-5.21-1.x86_64.rpm"
+    echo -e "${GREEN} Executing... ${c3} ${NC}"
+    eval "$c3"
+    
     echo -e "${BLUE} Download rpm - ncat-7.97-1.x86_64.rpm ${NC}"
     c3="sudo alien nmap-5.21-1.x86_64.rpm"
     echo -e "${GREEN} Executing... ${c3} ${NC}"
