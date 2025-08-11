@@ -61,7 +61,7 @@ nc_in() {
     eval "$c1"
 
     echo -e "${BLUE} Download rpm - ncat-7.97-1.x86_64.rpm ${NC}"
-    c2="wget ncat-7.97-1.x86_64.rpm"
+    c2="wget https://nmap.org/dist/ncat-7.97-1.x86_64.rpm"
     echo -e "${GREEN} Executing... ${c2} ${NC}"
     eval "$c2"
 
@@ -69,16 +69,17 @@ nc_in() {
     c3="sudo alien nmap-5.21-1.x86_64.rpm"
     echo -e "${GREEN} Executing... ${c3} ${NC}"
     eval "$c3"
-    
-    echo -e "${BLUE} Download rpm - ncat-7.97-1.x86_64.rpm ${NC}"
-    c3="sudo alien nmap-5.21-1.x86_64.rpm"
-    echo -e "${GREEN} Executing... ${c3} ${NC}"
+
+    echo -e "${BLUE} sudo dpkg --install nmap_5.21-2_amd64.deb ${NC}"
+    c4="sudo dpkg --install nmap_5.21-2_amd64.deb"
+    echo -e "${GREEN} Executing... ${c4} ${NC}"
     eval "$c3"
 }
 
 
 
 # --- Execution --- 
-ds1
+# ds1
 # nc_1
 # nc_in
+nc_in
