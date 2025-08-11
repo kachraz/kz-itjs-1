@@ -25,15 +25,35 @@ nc_1() {
     h1 "Using NC"
     DEST="45.79.112.203"
     PORT="4242"
-    c1="${GREEN}nc ${DEST} ${PORT} ${NC}"
-    echo -e "${GREENM}Executing ... ${c1}"
+    c1="nc ${DEST} ${PORT}"
+    echo -e "${GREEN}Executing ... ${c1}"
     eval "$c1"
 }
 
 # https://nmap.org/download.html#linux-rpm - Following this 
 nc_in() {
     h1 "Installing NCAT"
+
+    echo -e "${BLUE} First install Alien ${NC}"
+    c1="sudo apt-get install alien"
+    echo -e "${GREEN} Executing... ${c1} ${NC}"
+    eval "$c1"
+
+    echo -e "${BLUE} Download rpm - ncat-7.97-1.x86_64.rpm ${NC}"
+    c2="wget ncat-7.97-1.x86_64.rpm"
+    echo -e "${GREEN} Executing... ${c2} ${NC}"
+    eval "$c2"
+
+    echo -e "${BLUE} Download rpm - ncat-7.97-1.x86_64.rpm ${NC}"
+    c3="sudo alien nmap-5.21-1.x86_64.rpm"
+    echo -e "${GREEN} Executing... ${c3} ${NC}"
+    eval "$c3"
+
+
 }
 
+
+
 # --- Execution --- 
-nc_1
+# nc_1
+nc_in
