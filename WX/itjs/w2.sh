@@ -31,4 +31,4 @@ dig1()  {
 }
 
 # --- Execution ---
-dig1 | tee -a logz/dig1.txt
+dig1 

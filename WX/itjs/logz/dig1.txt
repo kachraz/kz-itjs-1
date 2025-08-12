@@ -2,3 +2,32 @@
 [0;35mDig xbow.com[0m
 [0;36m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
 [0;32m Executing ... dig xbow.com [0m
+[H[2J[3J[0;36m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[0;35mDig xbow.com[0m
+[0;36m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[0;32m Executing ... dig xbow.com [0m
+[H[2J[3J[0;36m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[0;35mDig xbow.com[0m
+[0;36m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[0;32m Executing ... dig xbow.com [0m
+
+; <<>> DiG 9.20.11-4-Debian <<>> xbow.com
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 23080
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 1224
+; COOKIE: fbfb3b0d8b86c43e (echoed)
+;; QUESTION SECTION:
+;xbow.com.			IN	A
+
+;; ANSWER SECTION:
+xbow.com.		300	IN	A	198.202.211.1
+
+;; Query time: 129 msec
+;; SERVER: 168.63.129.16#53(168.63.129.16) (UDP)
+;; WHEN: Tue Aug 12 12:02:51 UTC 2025
+;; MSG SIZE  rcvd: 65
+
