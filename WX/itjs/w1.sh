@@ -100,10 +100,22 @@ nc_in() {
 
 }
 
+# --- Various Workign test Commands 
+
+# -- Nmap Related-- 
+
+nmap_1() {
+    h1 "Standard Namp Test against http://scanme.nmap.org/ "
+    WB="scanme.nmap.org"
+    c1="nmap -sS -sV -sC -A -T4 ${WB}"
+    echo -e "${GREEN} Executing... ${c1} ${NC}"
+    eval "$c1"
+}
 
 
 # --- Execution --- 
 # ds1
 # nc_1
 # nc_in
-nc_in
+# nc_in
+nmap_1

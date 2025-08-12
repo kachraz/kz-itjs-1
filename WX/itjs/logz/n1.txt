@@ -1,0 +1,5 @@
+[H[2J[3J[0;36m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[0;35mStandard Namp Test against http://scanme.nmap.org/ [0m
+[0;36m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[0;32m Executing... nmap -sS -sV -sC -A -T4 scanme.nmap.org [0m
+Starting Nmap 7.95 ( https://nmap.org ) at 2025-08-12 10:49 UTC
