@@ -32,11 +32,12 @@ dig1()  {
 
 # Detailed Manual HTTP responses 
 curl1() {
-    h1 "Dig xbow.com"
-    c1="dig xbow.com"
+    h1 "curl xbow.com"
+    c1="curl -vvv xbow.com"
     echo -e "${GREEN} Executing ... ${c1} ${NC}"
     eval "$c1"
 }
 
 # --- Execution ---
-dig1 
+# dig1 
+curl1
