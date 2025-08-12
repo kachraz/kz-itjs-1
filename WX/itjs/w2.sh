@@ -30,5 +30,13 @@ dig1()  {
     eval "$c1"
 }
 
+# Detailed Manual HTTP responses 
+curl1() {
+    h1 "Dig xbow.com"
+    c1="dig xbow.com"
+    echo -e "${GREEN} Executing ... ${c1} ${NC}"
+    eval "$c1"
+}
+
 # --- Execution ---
 dig1 
