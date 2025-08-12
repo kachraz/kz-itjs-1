@@ -38,6 +38,15 @@ curl1() {
     eval "$c1"
 }
 
+# Using NC to talk to servers
+nc2() {
+    h1 "Ncat to talk to server"
+    c1="ncat $(dig +short xbow.com) 80"
+    echo -e "${GREEN} Executing ... ${c1} ${NC}"
+    eval "$c1"
+}
+
 # --- Execution ---
 # dig1 
-curl1
+# curl1
+nc2
