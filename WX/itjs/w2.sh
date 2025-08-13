@@ -46,6 +46,12 @@ nc2() {
     eval "$c1"
 }
 
+# SubDomian Discovery 
+sb1() {
+    h1 "Subdomain Panty"
+    
+}
+
 # --- Execution ---
 # dig1 
 # curl1
