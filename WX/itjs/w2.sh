@@ -49,10 +49,16 @@ nc2() {
 # SubDomian Discovery 
 sb1() {
     h1 "Subdomain Panty"
-    
+    DM="xbow.com"
+    c1="subfinder -d ${DM} -nW -o logz/sb1.txt"
+    echo -e "${GREEN} Executing ... ${c1} ${NC}"
+    eval "$c1"
 }
+    
+
 
 # --- Execution ---
 # dig1 
 # curl1
-nc2
+# nc2
+sb1 
