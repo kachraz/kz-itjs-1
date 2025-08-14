@@ -810,7 +810,101 @@ HexStrike v6.0 features a completely redesigned visual experience with a **profe
 
 ---
 
-## � **Quyick Installation**
+## 🐳 **Docker Deployment**
+
+### **Quick Start with Docker**
+
+The easiest way to get HexStrike AI up and running is using Docker. This eliminates the need for manual installation of 150+ security tools and dependencies.
+
+#### **Build and Run**
+
+```bash
+# Clone the repository
+git clone https://github.com/0x4m4/hexstrike-ai.git
+cd hexstrike-ai
+
+# Build the Docker image
+docker build -t hexstrike-ai:latest .
+
+# Run the container
+docker run -d \
+  --name hexstrike-ai \
+  -p 8000:8000 \
+  -v $(pwd)/data:/app/data \
+  -v $(pwd)/logs:/app/logs \
+  hexstrike-ai:latest
+```
+
+#### **Using Docker Compose**
+
+Create a `docker-compose.yml` file:
+
+```yaml
+version: '3.8'
+services:
+  hexstrike-ai:
+    build: .
+    container_name: hexstrike-ai
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+    environment:
+      - API_PORT=8000
+      - DEBUG_MODE=false
+    restart: unless-stopped
+```
+
+Then run:
+```bash
+docker-compose up -d
+```
+
+#### **Pre-built Image (Coming Soon)**
+
+```bash
+# Pull and run the pre-built image
+docker pull hexstrike/hexstrike-ai:latest
+docker run -d -p 8000:8000 --name hexstrike-ai hexstrike/hexstrike-ai:latest
+```
+
+#### **Docker Features**
+
+- ✅ **All 150+ security tools pre-installed**
+- ✅ **Optimized Ubuntu 22.04 base image**
+- ✅ **Non-root user for security**
+- ✅ **Health checks included**
+- ✅ **Persistent data volumes**
+- ✅ **Chrome/ChromeDriver for web automation**
+- ✅ **Go-based tools (Amass, Subfinder, Nuclei, etc.)**
+- ✅ **Python security libraries**
+- ✅ **Common wordlists included**
+
+#### **Container Management**
+
+```bash
+# View logs
+docker logs hexstrike-ai
+
+# Access container shell
+docker exec -it hexstrike-ai bash
+
+# Stop container
+docker stop hexstrike-ai
+
+# Remove container
+docker rm hexstrike-ai
+
+# Update to latest version
+docker pull hexstrike/hexstrike-ai:latest
+docker stop hexstrike-ai && docker rm hexstrike-ai
+docker run -d -p 8000:8000 --name hexstrike-ai hexstrike/hexstrike-ai:latest
+```
+
+---
+
+## � **Manual Installation**
 
 ### 📋 **Enhanced System Requirements**
 
