@@ -34,7 +34,6 @@ RUN apt-get update && apt-get install -y \
     # Network tools
     nmap \
     masscan \
-    zmap \
     netcat \
     socat \
     tcpdump \
@@ -45,30 +44,25 @@ RUN apt-get update && apt-get install -y \
     dirb \
     nikto \
     sqlmap \
-    wpscan \
     # DNS tools
     dnsutils \
     dnsrecon \
     fierce \
-    # Exploitation tools
-    metasploit-framework \
-    exploitdb \
     # Forensics tools
-    volatility3 \
     binwalk \
     foremost \
     # Crypto tools
     hashcat \
+    hashcat-data \
     john \
+    john-data \
     # System tools
     strace \
     ltrace \
     gdb \
-    radare2 \
     # Additional utilities
     jq \
     xmlstarlet \
-    yq \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Go (for some security tools)
