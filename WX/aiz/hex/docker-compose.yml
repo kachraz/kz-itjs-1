@@ -1,0 +1,24 @@
+version: "3.9"
+
+services:
+  hexstrike-ai:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        INSTALL_BROWSER_DEPS: "true"
+        INSTALL_PLAYWRIGHT_DEPS: "false"
+    image: hexstrike-ai:dev
+    container_name: hexstrike-ai
+    environment:
+      - HEXSTRIKE_PORT=8888
+      - DEBUG_MODE=0
+      - CHROME_BIN=/usr/bin/chromium
+      - CHROMEDRIVER_PATH=/usr/bin/chromedriver
+    ports:
+      - "8888:8888"
+    # The Dockerfile already defines a healthcheck hitting /health
+    restart: unless-stopped
+    # Uncomment to develop against local sources (container will write hexstrike.log inside the repo)
+    # volumes:
+    #   - ./:/app

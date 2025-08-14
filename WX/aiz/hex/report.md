@@ -48,7 +48,7 @@ The project’s Browser Agent uses Selenium with Chrome. The Dockerfile installs
 
 For a strict CI build (fail on any dependency error), remove the `|| true` from the `pip install -r requirements.txt` command.
 
-## Building and testing
+## Building and testing (Docker and Compose)
 
 Manual steps:
 - Build the image (default includes browser tooling):
