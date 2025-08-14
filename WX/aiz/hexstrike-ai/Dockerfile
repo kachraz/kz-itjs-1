@@ -113,7 +113,14 @@ RUN git clone https://github.com/radareorg/radare2 /tmp/radare2 && \
     ./sys/install.sh && \
     rm -rf /tmp/radare2 || echo "Radare2 installation failed, continuing..."
 
-# Install WPScan
+# Install Ruby and gems (for WPScan and other Ruby tools) BEFORE using gem
+RUN apt-get update && apt-get install -y \
+    ruby \
+    ruby-dev \
+    rubygems \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install WPScan (best-effort)
 RUN gem install wpscan || echo "WPScan installation failed, continuing..."
 
 # Install additional tools via pip
@@ -123,32 +130,29 @@ RUN pip3 install --no-cache-dir \
     sublist3r \
     || echo "Some pip tools failed to install, continuing..."
 
-# Install Node.js and npm (for some web tools)
+# Install Node.js and npm (for some web tools) - best-effort
 RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
-    apt-get install -y nodejs
+    apt-get install -y nodejs || echo "Node.js installation failed, continuing..."
 
-# Install Ruby and gems (for WPScan and other Ruby tools)
-RUN apt-get update && apt-get install -y \
-    ruby \
-    ruby-dev \
-    rubygems \
-    && rm -rf /var/lib/apt/lists/*
-
-# Install Chrome for browser automation
+# Install Chrome for browser automation (best-effort)
 RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add - && \
     echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list && \
     apt-get update && \
     apt-get install -y google-chrome-stable && \
-    rm -rf /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/* || echo "Google Chrome installation failed, continuing..."
 
-# Install ChromeDriver
-RUN CHROME_VERSION=$(google-chrome --version | grep -oP '\d+\.\d+\.\d+') && \
+# Install ChromeDriver if Chrome is available (best-effort)
+RUN if command -v google-chrome >/dev/null 2>&1; then \
+    CHROME_VERSION=$(google-chrome --version | grep -oP '\\d+\\.\\d+\\.\\d+') && \
     DRIVER_VERSION=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_${CHROME_VERSION%%.*}") && \
     wget -O /tmp/chromedriver.zip "https://chromedriver.storage.googleapis.com/${DRIVER_VERSION}/chromedriver_linux64.zip" && \
     unzip /tmp/chromedriver.zip -d /tmp && \
     mv /tmp/chromedriver /usr/local/bin/ && \
     chmod +x /usr/local/bin/chromedriver && \
-    rm /tmp/chromedriver.zip
+    rm /tmp/chromedriver.zip; \
+  else \
+    echo "Chrome not installed; skipping ChromeDriver"; \
+  fi
 
 # Copy application files
 COPY requirements.txt .

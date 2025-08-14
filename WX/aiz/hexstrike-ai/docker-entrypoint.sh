@@ -12,9 +12,10 @@ chown -R hexstrike:hexstrike /app/logs /app/data /app/wordlists 2>/dev/null || t
 
 # Check if Python dependencies are working
 echo "🔍 Checking Python dependencies..."
-python3 -c "import flask, requests, aiohttp, beautifulsoup4; print('✅ Core dependencies OK')" || {
+python3 -c "import flask, requests, aiohttp, bs4; print('✅ Core dependencies OK')" || {
     echo "❌ Missing core dependencies, installing..."
-    pip3 install flask requests aiohttp beautifulsoup4 lxml psutil colorama
+    # Try user install to avoid permission issues when running as non-root; never fail startup if this fails
+    pip3 install --user flask requests aiohttp beautifulsoup4 lxml psutil colorama || true
 }
 
 # Check if the server file exists and is executable
