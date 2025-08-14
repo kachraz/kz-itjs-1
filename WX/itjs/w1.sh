@@ -114,8 +114,8 @@ nmap_1() {
 
 
 # --- Execution --- 
-# ds1
+ds1
 # nc_1
 # nc_in
 # nc_in
-nmap_1
+# nmap_1
