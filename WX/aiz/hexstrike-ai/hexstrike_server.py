@@ -95,7 +95,8 @@ app = Flask(__name__)
 app.config['JSON_SORT_KEYS'] = False
 
 # API Configuration
-API_PORT = int(os.environ.get('HEXSTRIKE_PORT', 8888))
+# Prefer HEXSTRIKE_PORT if set; fallback to API_PORT (used by Docker) and then 8888
+API_PORT = int(os.environ.get('HEXSTRIKE_PORT') or os.environ.get('API_PORT', 8888))
 API_HOST = os.environ.get('HEXSTRIKE_HOST', '127.0.0.1')
 
 # ============================================================================
