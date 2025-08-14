@@ -7169,6 +7169,19 @@ file_manager = FileOperationsManager()
 @app.route("/health", methods=["GET"])
 def health_check():
     """Enhanced health check endpoint with telemetry"""
+    # Fast, lightweight health check by default. For full diagnostics use /health?full=1
+    try:
+        if request.args.get("full") not in ("1", "true", "yes"):
+            return jsonify({
+                "status": "healthy",
+                "message": "HexStrike AI server is running",
+                "version": "5.0.0",
+                "uptime": time.time() - telemetry.stats.get("start_time", time.time()),
+                "cache_stats": cache.get_stats(),
+                "quick": True
+            })
+    except Exception:
+        return jsonify({"status": "healthy", "message": "OK", "quick": True})
     essential_tools = ["nmap", "gobuster", "dirb", "nikto", "sqlmap", "hydra", "john"]
     cloud_tools = ["prowler", "scout2", "trivy", "kube-hunter", "cloudsploit"]
     advanced_tools = [
