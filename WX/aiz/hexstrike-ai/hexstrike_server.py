@@ -53,17 +53,30 @@ import asyncio
 import aiohttp
 from urllib.parse import urljoin, urlparse, parse_qs
 from bs4 import BeautifulSoup
-import selenium
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import TimeoutException, WebDriverException
-import mitmproxy
-from mitmproxy import http as mitmhttp
-from mitmproxy.tools.dump import DumpMaster
-from mitmproxy.options import Options as MitmOptions
+# Optional dependencies: selenium, mitmproxy (graceful degradation if missing)
+try:
+    import selenium
+    from selenium import webdriver
+    from selenium.webdriver.chrome.options import Options
+    from selenium.webdriver.common.by import By
+    from selenium.webdriver.support.ui import WebDriverWait
+    from selenium.webdriver.support import expected_conditions as EC
+    from selenium.common.exceptions import TimeoutException, WebDriverException
+    HAS_SELENIUM = True
+except Exception:
+    selenium = None
+    webdriver = Options = By = WebDriverWait = EC = TimeoutException = WebDriverException = None
+    HAS_SELENIUM = False
+
+try:
+    import mitmproxy
+    from mitmproxy import http as mitmhttp
+    from mitmproxy.tools.dump import DumpMaster
+    from mitmproxy.options import Options as MitmOptions
+    HAS_MITMPROXY = True
+except Exception:
+    mitmproxy = mitmhttp = DumpMaster = MitmOptions = None
+    HAS_MITMPROXY = False
 
 # ============================================================================
 # LOGGING CONFIGURATION (MUST BE FIRST)
