@@ -70,6 +70,14 @@ Smoke-test script:
   4. Run a couple of basic HTTP checks.
   5. Stop and remove the container.
 
+### Compose
+- Build and run:
+  - `docker compose up --build -d`
+- Logs:
+  - `docker compose logs -f`
+- Stop:
+  - `docker compose down`
+
 ## Configuration matrix
 
 Build arguments:
