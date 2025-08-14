@@ -31,8 +31,8 @@ COPY hexstrike_server.py .
 COPY hexstrike_mcp.py .
 COPY hexstrike-ai-mcp.json .
 
-# Install Python dependencies
-RUN pip3 install --no-cache-dir flask requests
+# Install Python dependencies (install from requirements.txt)
+RUN pip3 install --no-cache-dir -r requirements.txt || pip3 install --no-cache-dir flask requests psutil colorama
 
 # Create non-root user for security
 RUN useradd -m -s /bin/bash hexstrike && \
