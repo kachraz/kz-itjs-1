@@ -92,6 +92,20 @@ COPY requirements.txt /app/
 # Upgrade pip/setuptools/wheel to improve wheels resolution
 RUN python -m pip install --upgrade pip setuptools wheel
 
+# Install a core, minimal runtime subset first (imports used at server startup)
+# This ensures the API server can boot even if some optional heavy deps later fail to build.
+RUN pip install \
+      flask==2.3.3 \
+      requests==2.31.0 \
+      psutil==5.9.5 \
+      aiohttp==3.8.5 \
+      beautifulsoup4==4.12.2 \
+      lxml==4.9.3 \
+      selenium==4.15.2 \
+      mitmproxy==9.0.1 \
+      websockets==11.0.3 \
+      fastmcp==0.2.0 || true
+
 # Optional: install Playwright browser and deps if requested
 # HexStrike primarily uses Selenium; this is off by default to keep the image leaner
 RUN if [ "$INSTALL_PLAYWRIGHT_DEPS" = "true" ]; then \
@@ -99,8 +113,8 @@ RUN if [ "$INSTALL_PLAYWRIGHT_DEPS" = "true" ]; then \
       python -m playwright install --with-deps chromium; \
     fi
 
-# Install Python dependencies. Some optional packages are very heavy and may take time.
-# If you prefer a hard-fail build on any dependency error, remove the trailing '|| true'.
+# Install full requirements. Many packages are optional and/or heavy; allow non-zero exit without failing the image.
+# Remove '|| true' for strict builds.
 RUN --mount=type=cache,target=/root/.cache/pip \
     pip install -r requirements.txt || true
 
