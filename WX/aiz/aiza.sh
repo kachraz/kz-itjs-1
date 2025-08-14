@@ -118,6 +118,6 @@ rm_venv_find() {
 
 # Esxecution
 # gc_c
-# rov_i
+rov_i
 # opencode_i
-crush_i
+# crush_i
