@@ -1,4 +1,5 @@
-version: '3.8'
+# Docker Compose file for HexStrike AI
+# Note: version field is deprecated in newer Docker Compose
 
 services:
   hexstrike-ai:
