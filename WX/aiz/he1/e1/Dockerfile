@@ -59,14 +59,11 @@ FROM python-build AS network-tools
 
 # Install available network tools from repositories
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    # Core network scanning
     nmap \
     masscan \
-    # Domain enumeration tools (available in repos)
     fierce \
     dnsenum \
     theharvester \
-    # Network utilities
     dnsutils \
     netcat-traditional \
     socat \
