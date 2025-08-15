@@ -108,16 +108,12 @@ FROM network-tools AS web-tools
 
 # Install available web tools from repositories
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    # Directory/file enumeration
     gobuster \
     dirb \
-    # Web scanners
     nikto \
     sqlmap \
     wpscan \
-    # Web security tools
     wafw00f \
-    # Additional utilities
     unzip \
     && rm -rf /var/lib/apt/lists/*
 
@@ -154,12 +150,10 @@ RUN python3 -m pip install \
 FROM web-tools AS auth-tools
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    # Password attacks
     hydra \
     john \
     hashcat \
     medusa \
-    # Hash utilities
     hash-identifier \
     ophcrack \
     && rm -rf /var/lib/apt/lists/*
@@ -178,20 +172,16 @@ RUN python3 -m pip install patator
 FROM auth-tools AS binary-tools
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    # Debugging and analysis
     gdb \
     gdb-multiarch \
     radare2 \
     binwalk \
-    # System utilities
     binutils \
     strace \
     ltrace \
-    # Forensics
     foremost \
     steghide \
     exiftool \
-    # Java for Ghidra
     openjdk-17-jdk \
     && rm -rf /var/lib/apt/lists/*
 
@@ -226,9 +216,7 @@ RUN python3 -m pip install \
     terrascan
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    # Container security
     docker.io \
-    # GPG keys and repository management
     gnupg \
     lsb-release \
     && rm -rf /var/lib/apt/lists/*
@@ -264,12 +252,10 @@ RUN git clone https://github.com/docker/docker-bench-security.git /opt/docker-be
 FROM cloud-tools AS ctf-tools
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    # Forensics tools
     sleuthkit \
     testdisk \
     scalpel \
     bulk-extractor \
-    # Steganography
     outguess \
     && rm -rf /var/lib/apt/lists/*
 
