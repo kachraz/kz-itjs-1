@@ -1,0 +1,27 @@
+version: "3.9"
+
+services:
+  hexstrike:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: hexstrike-ai
+    # Map host port to the container's API port
+    ports:
+      - "${HEXSTRIKE_PORT:-8888}:8888"
+    environment:
+      # Server listens on this port inside the container
+      HEXSTRIKE_PORT: "${HEXSTRIKE_PORT:-8888}"
+      HEXSTRIKE_HOST: "0.0.0.0"
+      # Set to 1/true to enable verbose debug logs
+      DEBUG_MODE: "${DEBUG_MODE:-0}"
+    # Uses the HEALTHCHECK already defined in the Dockerfile
+    restart: unless-stopped
+    # Uncomment to override the default command if needed
+    # command: ["python3", "hexstrike_server.py", "--port", "8888"]
+
+# Usage:
+#   docker compose up --build -d
+#   open http://localhost:8888/health
+# Override port:
+#   HEXSTRIKE_PORT=9999 docker compose up --build -d
