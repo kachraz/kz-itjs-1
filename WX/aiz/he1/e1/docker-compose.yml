@@ -14,28 +14,17 @@ services:
       CHROMEDRIVER: "/usr/local/bin/chromedriver"
       DISPLAY: ":99"
     volumes:
-      # Optional: Mount for persistent data/configs
       - hexstrike_data:/app/data
-      # Optional: Mount for tool outputs
       - hexstrike_outputs:/app/outputs
+      - /var/run/docker.sock:/var/run/docker.sock
     restart: unless-stopped
-    # Privileged mode for advanced network tools
     privileged: true
     cap_add:
       - NET_ADMIN
       - SYS_ADMIN
-    # command: ["python3", "hexstrike_server.py"]
+      - SYS_PTRACE
+    network_mode: host
 
 volumes:
   hexstrike_data:
   hexstrike_outputs:
-
-# Usage:
-#   docker compose up --build -d
-#   open http://localhost:8888/health
-# Override port:
-#   HEXSTRIKE_PORT=9999 docker compose up --build -d
-# View logs:
-#   docker compose logs -f hexstrike
-# Access container:
-#   docker compose exec hexstrike bash
