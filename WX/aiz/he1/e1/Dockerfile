@@ -1,6 +1,6 @@
 # HexStrike AI MCP Agents - Container Image
 # Base: Python slim with Debian packages for headless Chromium and build deps
-FROM python:3.11-slim
+FROM python:3.11-bookworm
 
 ENV DEBIAN_FRONTEND=noninteractive \
     PYTHONDONTWRITEBYTECODE=1 \
@@ -12,6 +12,7 @@ ENV DEBIAN_FRONTEND=noninteractive \
 # - Chromium and chromedriver for BrowserAgent
 # - minimal GUI libs for headless chromium stability
 RUN apt-get update && apt-get install -y --no-install-recommends \
+    # build & headers for native wheels
     build-essential \
     gcc g++ make \
     python3-dev \
@@ -21,11 +22,18 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     pkg-config \
     ca-certificates \
     git curl wget unzip \
+    # chromium + chromedriver for Browser Agent (Selenium)
     chromium chromium-driver \
+    # chrome runtime libs
     fonts-liberation \
-    libglib2.0-0 libnss3 \
-    libgdk-pixbuf-2.0-0 libgtk-3-0 \
     libasound2 \
+    libatk-bridge2.0-0 libatk1.0-0 \
+    libcups2 libdbus-1-3 \
+    libdrm2 libgbm1 \
+    libglib2.0-0 libnspr4 libnss3 \
+    libx11-6 libx11-xcb1 libxcomposite1 libxdamage1 libxext6 libxfixes3 libxrandr2 \
+    libgdk-pixbuf-2.0-0 libgtk-3-0 \
+    xdg-utils \
     && rm -rf /var/lib/apt/lists/*
 
 # Workdir
@@ -39,9 +47,11 @@ RUN python -m pip install --upgrade pip && \
 # Copy application source
 COPY . /app
 
-# Environment for server
+# Environment for server and browser
 ENV HEXSTRIKE_PORT=8888 \
-    HEXSTRIKE_HOST=0.0.0.0
+    HEXSTRIKE_HOST=0.0.0.0 \
+    CHROME_BIN=/usr/bin/chromium \
+    CHROMEDRIVER=/usr/bin/chromedriver
 
 # Expose API port
 EXPOSE 8888
