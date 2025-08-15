@@ -48,16 +48,7 @@ EXPOSE 8888
 
 # Optional container healthcheck hitting /health
 HEALTHCHECK --interval=30s --timeout=10s --start-period=30s --retries=5 \
-  CMD python - <<'PY' || exit 1
-import sys, json, urllib.request
-try:
-    with urllib.request.urlopen('http://127.0.0.1:8888/health', timeout=5) as r:
-        ok = (r.status == 200)
-        data = json.loads(r.read().decode())
-        sys.exit(0 if ok and data.get('status') in ('healthy','ok','OK') else 1)
-except Exception:
-    sys.exit(1)
-PY
+  CMD curl -fsS http://127.0.0.1:8888/health || exit 1
 
 # Default command runs the API server
 CMD ["python3", "hexstrike_server.py"]
