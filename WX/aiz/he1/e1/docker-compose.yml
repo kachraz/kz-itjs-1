@@ -10,13 +10,32 @@ services:
       HEXSTRIKE_PORT: "${HEXSTRIKE_PORT:-8888}"
       HEXSTRIKE_HOST: "0.0.0.0"
       DEBUG_MODE: "${DEBUG_MODE:-0}"
-      CHROME_BIN: "/usr/bin/chromium"
-      CHROMEDRIVER: "/usr/bin/chromedriver"
+      CHROME_BIN: "/usr/bin/google-chrome"
+      CHROMEDRIVER: "/usr/local/bin/chromedriver"
+      DISPLAY: ":99"
+    volumes:
+      # Optional: Mount for persistent data/configs
+      - hexstrike_data:/app/data
+      # Optional: Mount for tool outputs
+      - hexstrike_outputs:/app/outputs
     restart: unless-stopped
-    # command: ["python3", "hexstrike_server.py", "--port", "8888"]
+    # Privileged mode for advanced network tools
+    privileged: true
+    cap_add:
+      - NET_ADMIN
+      - SYS_ADMIN
+    # command: ["python3", "hexstrike_server.py"]
+
+volumes:
+  hexstrike_data:
+  hexstrike_outputs:
 
 # Usage:
 #   docker compose up --build -d
 #   open http://localhost:8888/health
 # Override port:
 #   HEXSTRIKE_PORT=9999 docker compose up --build -d
+# View logs:
+#   docker compose logs -f hexstrike
+# Access container:
+#   docker compose exec hexstrike bash
