@@ -10,6 +10,8 @@ services:
       HEXSTRIKE_PORT: "${HEXSTRIKE_PORT:-8888}"
       HEXSTRIKE_HOST: "0.0.0.0"
       DEBUG_MODE: "${DEBUG_MODE:-0}"
+      CHROME_BIN: "/usr/bin/chromium"
+      CHROMEDRIVER: "/usr/bin/chromedriver"
     restart: unless-stopped
     # command: ["python3", "hexstrike_server.py", "--port", "8888"]
 
